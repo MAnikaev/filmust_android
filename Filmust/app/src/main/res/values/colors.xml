@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="buttonColor_off">#cfd8dc</color>
+    <color name="historyButtonColor_on">#F1A468</color>
+    <color name="favButtonColor_on">#E65656</color>
 </resources>
