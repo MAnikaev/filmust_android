@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Filmust</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">Search</string>
+    <string name="reccomendations">Recommendations</string>
+    <string name="title_name">Title Name</string>
 </resources>
