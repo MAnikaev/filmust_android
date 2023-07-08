@@ -7,8 +7,6 @@
     <string name="name">Name</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="having_account">Already have an account? <b>Sign Up</b></string>
-    <string name="hello_blank_fragment">Start Registration Fragment</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search">Search</string>
     <string name="reccomendations">Recommendations</string>
     <string name="title_name">Title Name</string>

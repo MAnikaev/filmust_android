@@ -13,4 +13,5 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/search_graph"/>
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>
