@@ -81,9 +81,13 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     if (dataSnapshot.exists()) {
                         val passwordFromBD = dataSnapshot.child(login).child("password").getValue(String::class.java)
-                        name = dataSnapshot.child(login).child("name").getValue(String::class.java)
-                        if(passwordFromBD.hashCode() != password.hashCode()){
+                        if(passwordFromBD != password.hashCode().toString()){
                             tiPass.error = "Invalid password"
+                        } else{
+                            findNavController().navigate(
+                                R.id.action_signInFragment_to_profileFragment,
+                                ProfileFragment.createBundle(login)
+                            )
                         }
                     } else {
                         tiLogin.error = "This login wasn't found"
@@ -95,10 +99,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
             })
 
             if(tiLogin.error == null && tiPass.error == null){
-                findNavController().navigate(
-                    R.id.action_signInFragment_to_profileFragment,
-                    ProfileFragment.createBundle(login, name)
-                )
+
             } else{
                 Snackbar.make(binding!!.root, "Correct errors!",
                     Snackbar.LENGTH_SHORT).setAnchorView(binding!!.root).show()

@@ -19,7 +19,8 @@ import com.google.firebase.database.ValueEventListener
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private var binding: FragmentProfileBinding? = null
-    private var name: String = ""
+    private lateinit var rootNode: FirebaseDatabase
+    private lateinit var reference: DatabaseReference
     private var login: String = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,9 +36,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             )
         }
 
-        binding!!.cardView.setOnClickListener{
-
-        }
+//        binding!!.cardView.setOnClickListener{
+//
+//        }
     }
 
 
@@ -49,20 +50,30 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     companion object {
 
         private const val ARG_LOGIN = "ARG_LOGIN"
-        private const val ARG_NAME = "ARG_NAME"
 
-        fun createBundle(login: String, name: String?): Bundle {
+        fun createBundle(login: String): Bundle {
             val bundle = Bundle()
             bundle.putString(ARG_LOGIN, login)
-            bundle.putString(ARG_NAME, name)
             return bundle
         }
     }
 
     fun putStrings(){
-        val loginStr = arguments?.getString(ARG_LOGIN)
-        binding!!.tvEmail.setText("@$loginStr")
-        val nameStr = arguments?.getString(ARG_NAME)
-        binding!!.tvName.setText(nameStr)
+        login = arguments?.getString(ARG_LOGIN)!!
+        binding!!.tvEmail.setText("@$login")
+        rootNode = FirebaseDatabase.getInstance()
+        reference = rootNode.getReference("users")
+        val query = reference.orderByChild("login").equalTo(login)
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    val userName = dataSnapshot.child(login).child("name").getValue(String::class.java)
+                    binding!!.tvName.setText(userName)
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("TAG", error.message, error.toException())
+            }
+        })
     }
 }

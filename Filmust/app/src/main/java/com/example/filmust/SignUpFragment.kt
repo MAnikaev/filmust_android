@@ -125,7 +125,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
                 findNavController().navigate(
                     R.id.action_signUpFragment_to_profileFragment,
-                    ProfileFragment.createBundle(login, name)
+                    ProfileFragment.createBundle(login)
                 )
             } else {
                 Snackbar.make(
