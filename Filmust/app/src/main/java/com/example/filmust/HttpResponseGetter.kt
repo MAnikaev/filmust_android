@@ -38,8 +38,6 @@ object HttpResponseGetter {
                             throw Exception()
                         when(typeOfMovieList){
                             TypeOfMovieList.Upcoming -> MoviesRepository.upcomingMovies = deserializeJsonToMoviesList(response.body!!.string())
-                            TypeOfMovieList.Viewed -> MoviesRepository.viewedMovies = deserializeJsonToMoviesList(response.body!!.string())
-                            TypeOfMovieList.Favourite -> MoviesRepository.favouriteMovies = deserializeJsonToMoviesList(response.body!!.string())
                             TypeOfMovieList.Searched -> MoviesRepository.searchedMovies = deserializeJsonToMoviesList((response.body!!.string()))
                         }
                     }

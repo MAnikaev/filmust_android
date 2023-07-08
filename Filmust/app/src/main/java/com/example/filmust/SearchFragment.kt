@@ -40,10 +40,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             val movieName = binding?.etSearch?.text.toString()
             if(movieName.isNotEmpty()){
                 HttpResponseGetter.getMoviesListByUrl("https://moviesdatabase.p.rapidapi.com/titles/search/title/$movieName?exact=true&info=base_info&titleType=movie", TypeOfMovieList.Searched)
-                Handler().postDelayed({
-                    adapter?.updateList(MoviesRepository.searchedMovies)
-                    binding?.twSearchTitle?.text = "Here's what I could find"
-                }, 500)
+                adapter?.updateList(MoviesRepository.searchedMovies)
+                binding?.twSearchTitle?.text = "Here's what I could find"
             }
         }
     }

@@ -28,6 +28,9 @@ class MovieItem(
             root.setOnClickListener{
                 onItemClick(movie.id)
             }
+            btnFavourite.setOnClickListener{
+
+            }
         }
     }
 }
