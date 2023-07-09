@@ -3,8 +3,10 @@ package com.example.filmust.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.filmust.R
 import com.example.filmust.databinding.FragmentDetailBinding
+import com.example.filmust.workdata.Movie
 
 
 class DetailFragment : Fragment(R.layout.fragment_detail) {
@@ -16,9 +18,17 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
         binding = FragmentDetailBinding.bind(view)
 
-        //Принимаем айдишник с другого фрагмента
-        val id = arguments?.getString("ARG_ID")
-        //TODO: Вывод картинки, названия и доп инфы
+        val movie = arguments?.get("ARG_ID") as Movie
+
+        Glide.with(this).load(movie.primaryImage?.url).into(binding!!.imageView)
+
+        binding?.tvTitle?.text = movie.titleText.text
+
+        binding?.tvDesc?.text = "The film ${movie.titleText.text}, shot in the genres: ${movie.genres!!.genres[0]}" +
+                "and ${movie.genres!!.genres[1]}" +
+                "and lasting ${movie.runtime!!.seconds} seconds, was released in ${movie.releaseDate.day}" +
+                "${movie.releaseDate.month} ${movie.releaseDate.year}. At the moment, " +
+                "his rating is ${movie.meterRanking!!.currentRank}. Description: ${movie.plot?.plotText}"
 
         binding?.run {
             historyBtn.setOnClickListener(){
