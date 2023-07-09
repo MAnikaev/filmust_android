@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import com.bumptech.glide.Glide
+import com.example.filmust.MainActivity
 import com.example.filmust.workdata.HttpResponseGetter
 import com.example.filmust.workdata.Movie
 import com.example.filmust.workdata.MovieAdapter
@@ -22,6 +23,11 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private var binding: FragmentSearchBinding? = null
     private var adapter : MovieAdapter? = null
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).showBottomNavigation()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
