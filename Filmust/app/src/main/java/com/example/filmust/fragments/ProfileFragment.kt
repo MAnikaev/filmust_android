@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import com.example.filmust.R
 import com.example.filmust.databinding.FragmentProfileBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -18,7 +17,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private var binding: FragmentProfileBinding? = null
     private lateinit var rootNode: FirebaseDatabase
     private lateinit var reference: DatabaseReference
-    private var login: String = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,6 +25,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         putStrings()
 
         binding!!.ivExit.setOnClickListener{
+            login = ""
             findNavController().navigate(
                 R.id.action_profileFragment_to_signInFragment,
                 SignInFragment.createBundle(login, "")
@@ -45,18 +44,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     companion object {
-
-        private const val ARG_LOGIN = "ARG_LOGIN"
-
-        fun createBundle(login: String): Bundle {
-            val bundle = Bundle()
-            bundle.putString(ARG_LOGIN, login)
-            return bundle
-        }
+        var login: String = ""
     }
 
     fun putStrings(){
-        login = arguments?.getString(ARG_LOGIN)!!
         binding!!.tvEmail.setText("@$login")
         rootNode = FirebaseDatabase.getInstance()
         reference = rootNode.getReference("users")
