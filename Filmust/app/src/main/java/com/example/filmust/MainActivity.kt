@@ -10,7 +10,7 @@ class   MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val controller = (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment)
+        val controller = (supportFragmentManager.findFragmentById(R.id.host_fragment) as NavHostFragment)
             .navController
     }
 }

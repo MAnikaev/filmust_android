@@ -39,9 +39,17 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         binding?.btnSearch?.setOnClickListener{
             val movieName = binding?.etSearch?.text.toString()
             if(movieName.isNotEmpty()){
-                HttpResponseGetter.getMoviesListByUrl("https://moviesdatabase.p.rapidapi.com/titles/search/title/$movieName?exact=true&info=base_info&titleType=movie", TypeOfMovieList.Searched)
-                adapter?.updateList(MoviesRepository.searchedMovies)
-                binding?.twSearchTitle?.text = "Here's what I could find"
+                CoroutineScope(Dispatchers.IO).launch {
+                    HttpResponseGetter.getMoviesListByUrl(
+                        "https://moviesdatabase.p.rapidapi.com/titles/search/title/$movieName?exact=true&info=base_info&titleType=movie",
+                        TypeOfMovieList.Searched
+                    )
+                    withContext(Dispatchers.Main) {
+                        delay(1000L)
+                        adapter?.updateList(MoviesRepository.searchedMovies)
+                        binding?.twSearchTitle?.text = "Here's what I could find"
+                    }
+                }
             }
         }
     }
