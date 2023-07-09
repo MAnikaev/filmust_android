@@ -81,10 +81,8 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                         if(passwordFromBD != password.hashCode().toString()){
                             tiPass.error = "Invalid password"
                         } else{
-                            findNavController().navigate(
-                                R.id.action_signInFragment_to_profileFragment,
-                                ProfileFragment.createBundle(login)
-                            )
+                            ProfileFragment.login = login
+                            findNavController().navigate(R.id.action_signInFragment_to_searchFragment)
                         }
                     } else {
                         tiLogin.error = "This login wasn't found"
