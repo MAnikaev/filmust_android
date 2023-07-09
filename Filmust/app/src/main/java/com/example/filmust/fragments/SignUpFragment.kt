@@ -123,7 +123,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
                 ProfileFragment.login = login
                 findNavController().navigate(R.id.action_signUpFragment_to_searchFragment)
-                )
             } else {
                 Snackbar.make(
                     binding!!.root, "Correct errors!",

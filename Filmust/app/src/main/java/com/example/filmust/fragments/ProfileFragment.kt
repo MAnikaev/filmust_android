@@ -2,6 +2,7 @@ package com.example.filmust.fragments
 
 import android.os.Bundle
 import android.util.Log
+import com.example.filmust.R
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.navigation.fragment.findNavController
