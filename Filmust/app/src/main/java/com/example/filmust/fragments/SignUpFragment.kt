@@ -121,9 +121,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 val user = User(name, login, password.hashCode().toString())
                 reference.child(login).setValue(user)
 
-                findNavController().navigate(
-                    R.id.action_signUpFragment_to_profileFragment,
-                    ProfileFragment.createBundle(login)
+                ProfileFragment.login = login
+                findNavController().navigate(R.id.action_signUpFragment_to_searchFragment)
                 )
             } else {
                 Snackbar.make(
