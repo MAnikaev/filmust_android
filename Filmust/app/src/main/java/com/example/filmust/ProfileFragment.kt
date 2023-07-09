@@ -59,7 +59,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     fun putStrings(){
-        login = arguments?.getString(ARG_LOGIN)!!
         binding!!.tvEmail.setText("@$login")
         rootNode = FirebaseDatabase.getInstance()
         reference = rootNode.getReference("users")
