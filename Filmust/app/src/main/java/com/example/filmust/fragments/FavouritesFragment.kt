@@ -1,10 +1,13 @@
-package com.example.filmust
+package com.example.filmust.fragments
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.example.filmust.workdata.Movie
+import com.example.filmust.workdata.MovieAdapter
+import com.example.filmust.R
 import com.example.filmust.databinding.FragmentFavouritesBinding
 
 class FavouritesFragment : Fragment(R.layout.fragment_favourites) {

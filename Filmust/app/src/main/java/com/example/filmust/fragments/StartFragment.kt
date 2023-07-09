@@ -1,12 +1,13 @@
-package com.example.filmust
+package com.example.filmust.fragments
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.filmust.workdata.HttpResponseGetter
+import com.example.filmust.R
+import com.example.filmust.workdata.TypeOfMovieList
 import com.example.filmust.databinding.FragmentStartBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +19,10 @@ class StartFragment : Fragment(R.layout.fragment_start) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentStartBinding.bind(view)
-        HttpResponseGetter.getMoviesListByUrl("https://moviesdatabase.p.rapidapi.com/titles/x/upcoming", TypeOfMovieList.Upcoming)
+        HttpResponseGetter.getMoviesListByUrl(
+            "https://moviesdatabase.p.rapidapi.com/titles/x/upcoming",
+            TypeOfMovieList.Upcoming
+        )
 
         CoroutineScope(Dispatchers.Main).launch {
             binding?.progressBar?.max = 10000

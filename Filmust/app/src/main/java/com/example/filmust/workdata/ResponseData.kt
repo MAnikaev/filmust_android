@@ -1,5 +1,4 @@
-package com.example.filmust
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
+package com.example.filmust.workdata
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 import kotlinx.serialization.descriptors.*

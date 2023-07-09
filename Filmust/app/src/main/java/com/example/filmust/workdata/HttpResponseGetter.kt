@@ -1,11 +1,7 @@
-package com.example.filmust
+package com.example.filmust.workdata
 
 
 
-import kotlinx.serialization.*
-import kotlinx.serialization.json.*
-import kotlinx.serialization.descriptors.*
-import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.Json
 import okhttp3.Call
 import okhttp3.Callback

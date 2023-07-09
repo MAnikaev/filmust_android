@@ -1,4 +1,4 @@
-package com.example.filmust
+package com.example.filmust.workdata
 
 data class PageData(
     val image: Int,

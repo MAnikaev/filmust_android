@@ -1,10 +1,10 @@
-package com.example.filmust
+package com.example.filmust.workdata
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.example.filmust.R
 import com.example.filmust.databinding.ItemMovieBinding
 
 class MovieItem(

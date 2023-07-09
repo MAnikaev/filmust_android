@@ -6,7 +6,7 @@
     app:startDestination="@id/signInFragment">
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.example.filmust.SignInFragment"
+        android:name="com.example.filmust.fragments.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in">
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.filmust.SignUpFragment"
+        android:name="com.example.filmust.fragments.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.filmust.ProfileFragment"
+        android:name="com.example.filmust.fragments.ProfileFragment"
         android:label="ProfileFragment" >
         <action
             android:id="@+id/action_profileFragment_to_signInFragment"

@@ -1,4 +1,4 @@
-package com.example.filmust
+package com.example.filmust.workdata
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmust.databinding.ItemPageBinding

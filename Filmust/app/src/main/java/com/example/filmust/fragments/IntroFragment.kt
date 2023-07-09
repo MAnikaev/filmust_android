@@ -1,16 +1,15 @@
-package com.example.filmust
+package com.example.filmust.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.example.filmust.workdata.PageAdapter
+import com.example.filmust.workdata.PageData
+import com.example.filmust.R
 import com.example.filmust.databinding.FragmentIntroBinding
-import com.zhpan.indicator.IndicatorView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.zhpan.indicator.enums.IndicatorSlideMode
 import com.zhpan.indicator.enums.IndicatorStyle
 
@@ -86,11 +85,13 @@ class IntroFragment : Fragment(R.layout.fragment_intro) {
                 var position = viewPager.currentItem
                 when (position) {
                     0, 1 -> viewPager.setCurrentItem(++position)
-                    2 -> findNavController().navigate(R.id.action_introFragment_to_searchFragment)
+                    2 -> {
+                        this.activity?.findViewById<BottomNavigationView>(R.id.bnv_main)?.visibility = View.VISIBLE
+                        findNavController().navigate(R.id.action_introFragment_to_searchFragment)
+                    }
                 }
             }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null

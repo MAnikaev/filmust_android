@@ -1,4 +1,4 @@
-package com.example.filmust
+package com.example.filmust.workdata
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

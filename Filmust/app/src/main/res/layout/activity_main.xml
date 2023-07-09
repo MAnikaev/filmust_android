@@ -21,6 +21,7 @@
         app:itemBackground="@color/primary"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_bottom"
         tools:layout_editor_absoluteX="0dp"/>
