@@ -38,12 +38,8 @@ class FirebaseManager {
         })
     }
 
-    fun writeUserData(favoriteMovies: List<Movie>, viewedMovies: List<Movie>, callback: () -> Unit) {
+    fun writeUserData() {
         favoriteReference.setValue(MoviesRepository.favoriteMovies)
         viewedReference.setValue(MoviesRepository.viewedMovies)
-    }
-
-    fun logoutUser() {
-        // Выход пользователя из приложения
     }
 }
