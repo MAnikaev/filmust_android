@@ -31,9 +31,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         binding = FragmentProfileBinding.bind(view)
         putStrings()
 
-        if(MoviesRepository.viewedMovies?.isEmpty() == true){
-            initAdapter(MoviesRepository.viewedMovies!!.toList())
-        }
+        initAdapter(MoviesRepository.viewedMovies!!.toList())
 
         binding!!.ivExit.setOnClickListener{
             login = ""

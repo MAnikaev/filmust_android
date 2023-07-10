@@ -98,11 +98,11 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 }
             })
 
-            if(tiLogin.error == null && tiPass.error == null){
-
-            } else{
-                Snackbar.make(binding!!.root, "Correct errors!",
-                    Snackbar.LENGTH_SHORT).setAnchorView(binding!!.root).show()
+            if(tiLogin.error != null || tiPass.error!= null) {
+                Snackbar.make(
+                    binding!!.root, "Correct errors!",
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
         }
 
