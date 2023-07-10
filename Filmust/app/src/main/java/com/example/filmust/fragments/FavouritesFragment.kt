@@ -43,7 +43,6 @@ class FavouritesFragment : Fragment(R.layout.fragment_favourites) {
             })
     }
 
-
     fun likeMovie(){
 
     }

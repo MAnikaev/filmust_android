@@ -3,6 +3,7 @@ package com.example.filmust.fragments
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.filmust.MainActivity
 import com.example.filmust.workdata.HttpResponseGetter
@@ -65,7 +66,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             onItemClick = {
                 val bundle = Bundle()
                 bundle.putString("MOVIE_ID", it)
-                //TODO("Здесь будет переход на фрагмент конкретного фильма")
+                findNavController().navigate(
+                    R.id.action_searchFragment_to_detailFragment,
+                    bundle
+                )
             })
         binding?.rwSearchResults?.adapter = adapter
     }
