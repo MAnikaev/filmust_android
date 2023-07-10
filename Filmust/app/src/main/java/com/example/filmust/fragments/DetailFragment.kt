@@ -131,13 +131,11 @@ class DetailFragment : Fragment(com.example.filmust.R.layout.fragment_detail) {
                     historyBtn.setBackgroundColor(Color.parseColor("#cfd8dc"))
                     MoviesRepository.viewedMovies!!.remove(movie)
                     isOnHistory = false
-                    Log.d("MyTag", "попал")
                 }
                 else{
                     historyBtn.setBackgroundColor(Color.parseColor("#F1A468"))
                     MoviesRepository.viewedMovies!!.add(movie!!)
                     isOnHistory = true
-                    Log.d("MyTag", "не попал")
                 }
             }
         }
