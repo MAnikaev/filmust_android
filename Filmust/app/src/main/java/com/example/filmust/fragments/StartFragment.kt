@@ -29,7 +29,12 @@ class StartFragment : Fragment(R.layout.fragment_start) {
             val value = 9900
             ObjectAnimator.ofInt(binding?.progressBar, "progress", value).setDuration(2000).start()
             delay(2000L)
-            findNavController().navigate(R.id.action_startFragment_to_introFragment)
+            if(ProfileFragment.login == "")
+            {
+                findNavController().navigate(R.id.action_startFragment_to_introFragment)
+            } else {
+                findNavController().navigate(R.id.action_startFragment_to_searchFragment)
+            }
         }
     }
 

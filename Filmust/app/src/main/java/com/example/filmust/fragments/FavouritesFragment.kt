@@ -24,7 +24,7 @@ class FavouritesFragment : Fragment(R.layout.fragment_favourites) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFavouritesBinding.bind(view)
 
-        //initAdapter() получить лист
+        MoviesRepository.favoriteMovies?.let { initAdapter(it) }
 
         binding!!.rvFavourites.findViewHolderForItemId(R.id.btn_favourite.toLong())
     }
@@ -37,7 +37,7 @@ class FavouritesFragment : Fragment(R.layout.fragment_favourites) {
                 val bundle = Bundle()
                 bundle.putString("MOVIE_ID", it)
                 findNavController().navigate(
-                    R.id.action_favouritesFragment_to_detailFragment2,
+                    R.id.action_favouritesFragment_to_detailFragment,
                     bundle
                 )
             })

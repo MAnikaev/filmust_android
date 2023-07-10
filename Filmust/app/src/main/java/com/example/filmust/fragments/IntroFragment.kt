@@ -87,7 +87,7 @@ class IntroFragment : Fragment(R.layout.fragment_intro) {
                     0, 1 -> viewPager.setCurrentItem(++position)
                     2 -> {
                         this.activity?.findViewById<BottomNavigationView>(R.id.bnv_main)?.visibility = View.VISIBLE
-                        findNavController().navigate(R.id.action_introFragment_to_searchFragment)
+                        findNavController().navigate(R.id.action_introFragment_to_signInFragment)
                     }
                 }
             }
