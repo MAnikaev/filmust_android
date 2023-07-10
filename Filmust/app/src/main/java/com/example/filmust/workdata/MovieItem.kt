@@ -29,7 +29,10 @@ class MovieItem(
                 onItemClick(movie.id)
             }
             btnFavourite.setOnClickListener{
-
+                MoviesRepository.favoriteMovies?.add(movie)
+            }
+            btnViewed.setOnClickListener {
+                MoviesRepository.viewedMovies?.add(movie)
             }
         }
     }

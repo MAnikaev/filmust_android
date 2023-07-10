@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.filmust.R
 import com.example.filmust.workdata.User
 import com.example.filmust.databinding.FragmentSignUpBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -29,6 +30,9 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
         binding = FragmentSignUpBinding.bind(view)
         putStrings()
+
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bnv_main)
+        bottomNavigationView?.visibility = View.GONE
 
         rootNode = FirebaseDatabase.getInstance()
         reference = rootNode.getReference("users")
@@ -127,7 +131,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 Snackbar.make(
                     binding!!.root, "Correct errors!",
                     Snackbar.LENGTH_SHORT
-                ).setAnchorView(binding!!.root).show()
+                ).show()
             }
         }
 

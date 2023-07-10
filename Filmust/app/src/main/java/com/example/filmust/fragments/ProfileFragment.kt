@@ -6,7 +6,12 @@ import com.example.filmust.R
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.filmust.databinding.FragmentProfileBinding
+import com.example.filmust.workdata.Movie
+import com.example.filmust.workdata.MovieAdapter
+import com.example.filmust.workdata.MoviesRepository
+import com.example.filmust.workdata.PageAdapter
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -16,6 +21,7 @@ import com.google.firebase.database.ValueEventListener
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private var binding: FragmentProfileBinding? = null
+    private var adapter: MovieAdapter? = null
     private lateinit var rootNode: FirebaseDatabase
     private lateinit var reference: DatabaseReference
 
@@ -24,6 +30,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         binding = FragmentProfileBinding.bind(view)
         putStrings()
+
+        if(MoviesRepository.viewedMovies?.isEmpty() == true){
+            initAdapter(MoviesRepository.viewedMovies!!.toList())
+        }
 
         binding!!.ivExit.setOnClickListener{
             login = ""
@@ -65,4 +75,20 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             }
         })
     }
+
+    private fun initAdapter(listOfMovies : List<Movie>) {
+        adapter = MovieAdapter(
+            listOfMovies = listOfMovies,
+            glide = Glide.with(this),
+            onItemClick = {
+                val bundle = Bundle()
+                bundle.putString("MOVIE_ID", it)
+                findNavController().navigate(
+                    R.id.action_searchFragment_to_detailFragment,
+                    bundle
+                )
+            })
+        binding?.rvViewed?.adapter = adapter
+    }
+
 }

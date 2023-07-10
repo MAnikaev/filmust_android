@@ -5,8 +5,10 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.navigation.fragment.findNavController
+import com.example.filmust.MainActivity
 import com.example.filmust.R
 import com.example.filmust.databinding.FragmentSignInBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -28,6 +30,9 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
         binding = FragmentSignInBinding.bind(view)
         putStrings()
+
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bnv_main)
+        bottomNavigationView?.visibility = View.GONE
 
         rootNode = FirebaseDatabase.getInstance()
         reference = rootNode.getReference("users")
