@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.filmust.fragments.ProfileFragment
+import com.example.filmust.workdata.FirebaseManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
 
     private var bottomNavigationView: BottomNavigationView? = null
+    private lateinit var firebaseManager: FirebaseManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +21,10 @@ class MainActivity : AppCompatActivity() {
 
         val prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE)
         val login = prefs.getString("userLogin", "")
-        ProfileFragment.login = login!!
+        if(login != ""){
+            ProfileFragment.login = login!!
+            firebaseManager.readUserData()
+        }
 
         bottomNavigationView = findViewById<BottomNavigationView>(R.id.bnv_main)
 
@@ -37,9 +42,13 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
 
-        val login = ProfileFragment.login
-        val prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE)
-        prefs.edit().putString("userLogin", login).apply()
+        if(ProfileFragment.login != ""){
+            firebaseManager.writeUserData()
+
+            val login = ProfileFragment.login
+            val prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE)
+            prefs.edit().putString("userLogin", login).apply()
+        }
     }
 
     fun hideBottomNavigation() {
