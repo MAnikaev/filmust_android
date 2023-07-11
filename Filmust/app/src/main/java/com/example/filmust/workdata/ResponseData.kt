@@ -6,9 +6,9 @@ import kotlinx.serialization.encoding.*
 
 @Serializable
 data class MovieResponse (
-    val page: Long,
+    val page: Long? = null,
     val next: String? = null,
-    val entries: Long,
+    val entries: Long? = null,
     val results: List<Movie>
 )
 
@@ -25,87 +25,66 @@ data class Movie(
     var primaryImage: PrimaryImage? = null,   //картинка
     var titleType: TitleType?,
     var genres: Genres? = null,                       //жанры
-    var titleText: TitleText,                 //название
-    var originalTitleText: TitleText,
-    var releaseYear: ReleaseYear,
-    var releaseDate: ReleaseDate,             //дата выхода
+    var titleText: TitleText? = null,                 //название
+    var originalTitleText: TitleText? = null,
+    var releaseYear: ReleaseYear? = null,
+    var releaseDate: ReleaseDate? = null,             //дата выхода
     var runtime: Runtime? = null,             //длительность
     var series: JsonElement? = null,
     var meterRanking: MeterRanking? = null,   //рейтинг
     var plot: Plot? = null                    //описание
-){
-    fun toHashMap(): HashMap<String, Any?> {
-        val hashMap = HashMap<String, Any?>()
-        hashMap["id"] = id
-        hashMap["resultID"] = resultID
-        hashMap["titleType"] = titleType
-        hashMap["titleText"] = titleText
-        hashMap["originalTitleText"] = originalTitleText
-        hashMap["releaseYear"] = releaseYear
-        hashMap["releaseDate"] = releaseDate
-        hashMap["ratingsSummary"] = ratingsSummary
-        hashMap["episodes"] = episodes
-        hashMap["primaryImage"] = primaryImage
-        hashMap["genres"] = genres
-        hashMap["runtime"] = runtime
-        hashMap["series"] = series.toString()
-        hashMap["meterRanking"] = meterRanking
-        hashMap["plot"] = plot
-        return hashMap
-    }
-}
-
+)
 @Serializable
 data class ResultEpisodes (
-    val episodes: TotalEpisodesClass,
-    val seasons: List<Season>,
-    val years: List<Year>,
-    val totalEpisodes: TotalEpisodesClass,
-    val unknownSeasonEpisodes: TotalEpisodesClass,
-    val topRated: TopRated,
+    val episodes: TotalEpisodesClass? = null,
+    val seasons: List<Season>? = null,
+    val years: List<Year>? = null,
+    val totalEpisodes: TotalEpisodesClass? = null,
+    val unknownSeasonEpisodes: TotalEpisodesClass? = null,
+    val topRated: TopRated? = null,
 
     @SerialName("__typename")
-    val typename: String
+    val typename: String? = null
 )
 
 @Serializable
 data class TotalEpisodesClass (
-    val total: Long,
+    val total: Long? = null,
 
     @SerialName("__typename")
-    val typename: String
+    val typename: String? = null
 )
 
 @Serializable
 data class Season (
-    val number: Long,
+    val number: Long? = null,
 
     @SerialName("__typename")
-    val typename: String
+    val typename: String? = null
 )
 
 @Serializable
 data class TopRated (
-    val edges: List<Edge>,
+    val edges: List<Edge>? = null,
 
     @SerialName("__typename")
-    val typename: String
+    val typename: String? = null
 )
 
 @Serializable
 data class Edge (
-    val node: Node,
+    val node: Node? = null,
 
     @SerialName("__typename")
-    val typename: String
+    val typename: String? = null
 )
 
 @Serializable
 data class Node (
-    val ratingsSummary: NodeRatingsSummary,
+    val ratingsSummary: NodeRatingsSummary? = null,
 
     @SerialName("__typename")
-    val typename: String
+    val typename: String? = null
 )
 
 @Serializable
@@ -113,7 +92,7 @@ data class NodeRatingsSummary (
     val aggregateRating: JsonElement? = null,
 
     @SerialName("__typename")
-    val typename: RatingsSummaryTypename
+    val typename: RatingsSummaryTypename? = null
 )
 
 @Serializable
@@ -123,27 +102,27 @@ enum class RatingsSummaryTypename(val value: String) {
 
 @Serializable
 data class Year (
-    val year: Long,
+    val year: Long? = null,
 
     @SerialName("__typename")
-    val typename: String
+    val typename: String? = null
 )
 
 @Serializable
 data class Genres (
-    val genres: List<Genre>,
+    val genres: List<Genre>? = null,
 
     @SerialName("__typename")
-    val typename: GenresTypename
+    val typename: GenresTypename? = null
 )
 
 @Serializable
 data class Genre (
-    val text: String,
-    val id: String,
+    val text: String? = null,
+    val id: String? = null,
 
     @SerialName("__typename")
-    val typename: GenreTypename
+    val typename: GenreTypename? = null
 )
 
 @Serializable
@@ -158,28 +137,28 @@ enum class GenresTypename(val value: String) {
 
 @Serializable
 data class MeterRanking (
-    val currentRank: Long,
-    val rankChange: RankChange,
+    val currentRank: Long? = null,
+    val rankChange: RankChange? = null,
 
     @SerialName("__typename")
-    val typename: String
+    val typename: String? = null
 )
 
 @Serializable
 data class RankChange (
-    val changeDirection: String,
-    val difference: Long,
+    val changeDirection: String? = null,
+    val difference: Long? = null,
 
     @SerialName("__typename")
-    val typename: String
+    val typename: String? = null
 )
 
 @Serializable
 data class TitleText (
-    val text: String,
+    val text: String? = null,
 
     @SerialName("__typename")
-    val typename: OriginalTitleTextTypename
+    val typename: OriginalTitleTextTypename? = null
 )
 
 @Serializable
@@ -189,27 +168,27 @@ enum class OriginalTitleTextTypename(val value: String) {
 
 @Serializable
 data class Plot (
-    val plotText: PlotText,
-    val language: Language,
+    val plotText: PlotText? = null,
+    val language: Language? = null,
 
     @SerialName("__typename")
-    val typename: String
+    val typename: String? = null
 )
 
 @Serializable
 data class Language (
-    val id: String,
+    val id: String? = null,
 
     @SerialName("__typename")
-    val typename: String
+    val typename: String? = null
 )
 
 @Serializable
 data class PlotText (
-    val plainText: String,
+    val plainText: String? = null,
 
     @SerialName("__typename")
-    val typename: PlotTextTypename
+    val typename: PlotTextTypename? = null
 )
 
 @Serializable
@@ -219,33 +198,33 @@ enum class PlotTextTypename(val value: String) {
 
 @Serializable
 data class PrimaryImage (
-    val id: String,
-    val width: Long,
-    val height: Long,
-    val url: String,
-    val caption: PlotText,
+    val id: String? = null,
+    val width: Long? = null,
+    val height: Long? = null,
+    val url: String? = null,
+    val caption: PlotText? = null,
 
     @SerialName("__typename")
-    val typename: String
+    val typename: String? = null
 )
 
 @Serializable
 data class ResultRatingsSummary (
     val aggregateRating: JsonElement? = null,
-    val voteCount: Long,
+    val voteCount: Long? = null,
 
     @SerialName("__typename")
-    val typename: RatingsSummaryTypename
+    val typename: RatingsSummaryTypename? = null
 )
 
 @Serializable
 data class ReleaseDate (
     val day: Long? = null,
-    val month: Long,
-    val year: Long,
+    val month: Long? = null,
+    val year: Long? = null,
 
     @SerialName("__typename")
-    val typename: ReleaseDateTypename
+    val typename: ReleaseDateTypename? = null
 )
 
 @Serializable
@@ -255,11 +234,11 @@ enum class ReleaseDateTypename(val value: String) {
 
 @Serializable
 data class ReleaseYear (
-    val year: Long,
+    val year: Long? = null,
     val endYear: JsonElement? = null,
 
     @SerialName("__typename")
-    val typename: ReleaseYearTypename
+    val typename: ReleaseYearTypename? = null
 )
 
 @Serializable
@@ -269,19 +248,19 @@ enum class ReleaseYearTypename(val value: String) {
 
 @Serializable
 data class Runtime (
-    val seconds: Long,
+    val seconds: Long? = null,
     val displayableProperty: DisplayableProperty? = null,
 
     @SerialName("__typename")
-    val typename: String
+    val typename: String? = null
 )
 
 @Serializable
 data class DisplayableProperty (
-    val value: PlotText,
+    val value: PlotText? = null,
 
     @SerialName("__typename")
-    val typename: DisplayablePropertyTypename
+    val typename: DisplayablePropertyTypename? = null
 )
 
 @Serializable
@@ -293,23 +272,23 @@ enum class DisplayablePropertyTypename(val value: String) {
 @Serializable
 data class TitleType (
     val displayableProperty: DisplayableProperty? = null,
-    val text: Text,
-    val id: ID,
-    val isSeries: Boolean,
-    val isEpisode: Boolean,
+    val text: Text? = null,
+    val id: ID? = null,
+    val isSeries: Boolean? = null,
+    val isEpisode: Boolean? = null,
     val categories: List<Category>? = null,
     val canHaveEpisodes: Boolean? = null,
 
     @SerialName("__typename")
-    val typename: TitleTypeTypename
+    val typename: TitleTypeTypename? = null
 )
 
 @Serializable
 data class Category (
-    val value: Value,
+    val value: Value? = null,
 
     @SerialName("__typename")
-    val typename: CategoryTypename
+    val typename: CategoryTypename? = null
 )
 
 @Serializable

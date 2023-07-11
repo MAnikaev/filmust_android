@@ -10,6 +10,7 @@ import com.example.filmust.workdata.Movie
 import com.example.filmust.workdata.MovieAdapter
 import com.example.filmust.R
 import com.example.filmust.databinding.FragmentFavouritesBinding
+import com.example.filmust.workdata.LightMovie
 import com.example.filmust.workdata.MoviesRepository
 
 class FavouritesFragment : Fragment(R.layout.fragment_favourites) {
@@ -26,7 +27,7 @@ class FavouritesFragment : Fragment(R.layout.fragment_favourites) {
         binding!!.rvFavourites.findViewHolderForItemId(R.id.btn_favourite.toLong())
     }
 
-    private fun initAdapter(listOfMovies : List<Movie>){
+    private fun initAdapter(listOfMovies : List<LightMovie>){
         adapter = MovieAdapter(
             listOfMovies = listOfMovies,
             glide = Glide.with(this),

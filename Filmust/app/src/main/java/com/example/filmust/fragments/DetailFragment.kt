@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.filmust.databinding.FragmentDetailBinding
+import com.example.filmust.workdata.LightMovie
 import com.example.filmust.workdata.HttpResponseGetter
 import com.example.filmust.workdata.Movie
 import com.example.filmust.workdata.MoviesRepository
@@ -107,6 +108,7 @@ class DetailFragment : Fragment(com.example.filmust.R.layout.fragment_detail) {
         }
         else{
             binding.historyBtn.setBackgroundColor(Color.parseColor("#cfd8dc"))
+
         }
 
         binding.run {

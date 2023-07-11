@@ -21,8 +21,9 @@ class MovieItem(
 ) : ViewHolder(binding.root) {
     private val options: RequestOptions = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL)
 
-    fun onBind(movie: Movie){
+    fun onBind(movie: LightMovie){
         binding.run {
+
             twTitleName.text = movie.titleText.text
             if(isOnFavMethod(movie.id)){
                 btnFavourite.setImageResource(R.drawable.red_heart)
@@ -35,33 +36,33 @@ class MovieItem(
                 btnViewed.setImageResource(R.drawable.baseline_remove_red_eye_24)
             }
             glide
-                .load(movie.primaryImage?.url)
+                .load(movie.imageUrl)
                 .placeholder(R.drawable.filmust_not_found)
                 .error(R.drawable.filmust_not_found)
                 .apply(options)
                 .into(movieImage)
 
             root.setOnClickListener{
-                onItemClick(movie.id)
+                onItemClick(movie.id!!)
             }
             btnFavourite.setOnClickListener{
-                if(MoviesRepository.favoriteSet.contains(movie.resultID)){
-                    MoviesRepository.favoriteSet.remove(movie.resultID)
+                if(MoviesRepository.favoriteSet.contains(movie.id)){
+                    MoviesRepository.favoriteSet.remove(movie.id)
                     btnFavourite.setImageResource(R.drawable.baseline_favorite_24)
                     MoviesRepository.favoriteMovies?.remove(movie)
-                } else{
-                    MoviesRepository.favoriteSet.add(movie.resultID)
+                } else {
+                    MoviesRepository.favoriteSet.add(movie.id!!)
                     btnFavourite.setImageResource(R.drawable.red_heart)
                     MoviesRepository.favoriteMovies?.add(movie)
                 }
             }
             btnViewed.setOnClickListener {
-                if(MoviesRepository.viewedSet.contains(movie.resultID)){
-                    MoviesRepository.viewedSet.remove(movie.resultID)
+                if(MoviesRepository.viewedSet.contains(movie.id)){
+                    MoviesRepository.viewedSet.remove(movie.id)
                     btnViewed.setImageResource(R.drawable.baseline_remove_red_eye_24)
                     MoviesRepository.viewedMovies?.remove(movie)
-                } else{
-                    MoviesRepository.viewedSet.add(movie.resultID)
+                } else {
+                    MoviesRepository.viewedSet.add(movie.id!!)
                     btnViewed.setImageResource(R.drawable.red_eye)
                     MoviesRepository.viewedMovies?.add(movie)
                 }

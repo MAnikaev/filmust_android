@@ -13,6 +13,7 @@ import com.example.filmust.workdata.MoviesRepository
 import com.example.filmust.R
 import com.example.filmust.workdata.TypeOfMovieList
 import com.example.filmust.databinding.FragmentSearchBinding
+import com.example.filmust.workdata.LightMovie
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -59,7 +60,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         binding = null
     }
 
-    private fun initAdapter(listOfMovies : List<Movie>) {
+    private fun initAdapter(listOfMovies : List<LightMovie>) {
         adapter = MovieAdapter(
             listOfMovies = listOfMovies,
             glide = Glide.with(this),

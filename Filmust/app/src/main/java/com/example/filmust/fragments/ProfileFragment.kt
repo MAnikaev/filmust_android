@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.filmust.databinding.FragmentProfileBinding
 import com.example.filmust.workdata.FirebaseManager
+import com.example.filmust.workdata.LightMovie
 import com.example.filmust.workdata.Movie
 import com.example.filmust.workdata.MovieAdapter
 import com.example.filmust.workdata.MoviesRepository
@@ -77,7 +78,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         })
     }
 
-    private fun initAdapter(listOfMovies : List<Movie>) {
+    private fun initAdapter(listOfMovies : List<LightMovie>) {
         adapter = MovieAdapter(
             listOfMovies = listOfMovies,
             glide = Glide.with(this),

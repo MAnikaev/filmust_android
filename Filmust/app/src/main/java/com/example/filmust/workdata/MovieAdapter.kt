@@ -9,7 +9,7 @@ import com.bumptech.glide.RequestManager
 import com.example.filmust.databinding.ItemMovieBinding
 
 class MovieAdapter(
-    private var listOfMovies: List<Movie>,
+    private var listOfMovies: List<LightMovie>,
     val glide: RequestManager,
     val onItemClick: (String) -> Unit
 ) : RecyclerView.Adapter<MovieItem>() {
@@ -23,7 +23,7 @@ class MovieAdapter(
             glide = glide,
             onItemClick = onItemClick
         )
-
+//
     override fun getItemCount(): Int {
         return listOfMovies.size
     }
@@ -32,7 +32,7 @@ class MovieAdapter(
         holder.onBind(listOfMovies[position])
     }
 
-    fun updateList(newList: List<Movie>){
+    fun updateList(newList: List<LightMovie>){
         listOfMovies = newList
         notifyDataSetChanged()
     }

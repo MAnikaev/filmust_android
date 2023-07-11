@@ -1,10 +1,10 @@
 package com.example.filmust.workdata
 
 object MoviesRepository {
-    var upcomingMovies : List<Movie> = mutableListOf()
-    var searchedMovies : List<Movie> = mutableListOf()
-    var favoriteMovies : MutableList<Movie>? = mutableListOf()
-    var viewedMovies : MutableList<Movie>? = mutableListOf()
+    var upcomingMovies : List<LightMovie> = mutableListOf()
+    var searchedMovies : List<LightMovie> = mutableListOf()
+    var favoriteMovies : MutableList<LightMovie>? = mutableListOf()
+    var viewedMovies : MutableList<LightMovie>? = mutableListOf()
     val favoriteSet : HashSet<String> = hashSetOf()
     val viewedSet : HashSet<String> = hashSetOf()
 }
