@@ -24,11 +24,15 @@ class MovieItem(
     fun onBind(movie: Movie){
         binding.run {
             twTitleName.text = movie.titleText.text
-            if(MoviesRepository.favoriteSet.contains(movie.resultID)){
+            if(isOnFavMethod(movie.id)){
                 btnFavourite.setImageResource(R.drawable.red_heart)
+            } else {
+                btnFavourite.setImageResource(R.drawable.baseline_favorite_24)
             }
-            if(MoviesRepository.viewedSet.contains(movie.resultID)){
+            if(isOnHistMethod(movie.id)){
                 btnViewed.setImageResource(R.drawable.red_eye)
+            } else{
+                btnViewed.setImageResource(R.drawable.baseline_remove_red_eye_24)
             }
             glide
                 .load(movie.primaryImage?.url)
@@ -64,4 +68,22 @@ class MovieItem(
             }
         }
     }
+    private fun isOnFavMethod(id: String?) : Boolean {
+        for (movie in MoviesRepository.favoriteMovies!!) {
+            if (movie.id == id) {
+                return true
+            }
+        }
+        return false
+    }
+
+    private fun isOnHistMethod(id: String?) : Boolean {
+        for (movie in MoviesRepository.viewedMovies!!) {
+            if (movie.id == id) {
+                return true
+            }
+        }
+        return false
+    }
+
 }

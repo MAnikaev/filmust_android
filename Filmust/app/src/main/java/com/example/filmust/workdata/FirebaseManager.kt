@@ -18,35 +18,35 @@ class FirebaseManager {
         var favoriteReference = reference.child(ProfileFragment.login).child("favoriteMovie")
         var viewedReference = reference.child(ProfileFragment.login).child("viewedMovies")
         fun readUserData() {
-            favoriteReference.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val list = snapshot as List<Movie>
-                    MoviesRepository.favoriteMovies = list.toMutableList()
-                }
-                override fun onCancelled(error: DatabaseError) {
-                    // Обработка ошибки
-                }
-            })
-            if (MoviesRepository.favoriteMovies != null) {
-                for (movie in MoviesRepository.favoriteMovies!!) {
-                    MoviesRepository.favoriteSet.add(movie.resultID)
-                }
-            }
-
-            viewedReference.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val list = snapshot as List<Movie>
-                    MoviesRepository.viewedMovies = list.toMutableList()
-                }
-                override fun onCancelled(error: DatabaseError) {
-                    // Обработка ошибки
-                }
-            })
-            if (MoviesRepository.viewedMovies != null) {
-                for (movie in MoviesRepository.viewedMovies!!) {
-                    MoviesRepository.viewedSet.add(movie.resultID)
-                }
-            }
+//            favoriteReference.addListenerForSingleValueEvent(object : ValueEventListener {
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    val list = snapshot as List<Movie>
+//                    MoviesRepository.favoriteMovies = list.toMutableList()
+//                }
+//                override fun onCancelled(error: DatabaseError) {
+//                    // Обработка ошибки
+//                }
+//            })
+//            if (MoviesRepository.favoriteMovies != null) {
+//                for (movie in MoviesRepository.favoriteMovies!!) {
+//                    MoviesRepository.favoriteSet.add(movie.resultID)
+//                }
+//            }
+//
+//            viewedReference.addListenerForSingleValueEvent(object : ValueEventListener {
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    val list = snapshot as List<Movie>
+//                    MoviesRepository.viewedMovies = list.toMutableList()
+//                }
+//                override fun onCancelled(error: DatabaseError) {
+//                    // Обработка ошибки
+//                }
+//            })
+//            if (MoviesRepository.viewedMovies != null) {
+//                for (movie in MoviesRepository.viewedMovies!!) {
+//                    MoviesRepository.viewedSet.add(movie.resultID)
+//                }
+//            }
         }
 
         fun writeUserData() {
