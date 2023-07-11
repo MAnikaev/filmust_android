@@ -43,30 +43,14 @@ data class Movie(
         hashMap["originalTitleText"] = originalTitleText
         hashMap["releaseYear"] = releaseYear
         hashMap["releaseDate"] = releaseDate
-        if (ratingsSummary != null) {
-            hashMap["ratingsSummary"] = ratingsSummary
-        }
-        if (episodes != null) {
-            hashMap["episodes"] = episodes
-        }
-        if (primaryImage != null) {
-            hashMap["primaryImage"] = primaryImage
-        }
-        if (genres != null) {
-            hashMap["genres"] = genres
-        }
-        if (runtime != null) {
-            hashMap["runtime"] = runtime
-        }
-        if (series != null) {
-            hashMap["series"] = series.toString()
-        }
-        if (meterRanking != null) {
-            hashMap["meterRanking"] = meterRanking
-        }
-        if (plot != null) {
-            hashMap["plot"] = plot
-        }
+        hashMap["ratingsSummary"] = ratingsSummary
+        hashMap["episodes"] = episodes
+        hashMap["primaryImage"] = primaryImage
+        hashMap["genres"] = genres
+        hashMap["runtime"] = runtime
+        hashMap["series"] = series.toString()
+        hashMap["meterRanking"] = meterRanking
+        hashMap["plot"] = plot
         return hashMap
     }
 }

@@ -20,8 +20,7 @@ class FirebaseManager {
         fun readUserData() {
             favoriteReference.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val jsonString = snapshot.getValue().toString()
-                    val list = deserializeJsonToMoviesList(jsonString)
+                    val list = snapshot as List<Movie>
                     MoviesRepository.favoriteMovies = list.toMutableList()
                 }
                 override fun onCancelled(error: DatabaseError) {
@@ -36,8 +35,7 @@ class FirebaseManager {
 
             viewedReference.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val jsonString = snapshot.getValue().toString()
-                    val list = deserializeJsonToMoviesList(jsonString)
+                    val list = snapshot as List<Movie>
                     MoviesRepository.viewedMovies = list.toMutableList()
                 }
                 override fun onCancelled(error: DatabaseError) {
@@ -69,11 +67,6 @@ class FirebaseManager {
                 }
                 viewedReference.setValue(viewedMovies)
             }
-        }
-
-        private fun deserializeJsonToMoviesList(jsonString : String) : List<Movie> {
-            val json = Json { allowStructuredMapKeys = true }
-            return json.decodeFromString(MovieResponse.serializer(), jsonString).results
         }
 
     }
