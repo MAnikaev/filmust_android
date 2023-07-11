@@ -13,7 +13,7 @@ data class MovieResponse (
 )
 
 @Serializable
-data class Movie (
+data class Movie(
     @SerialName("_id")
     var id: String,
 
@@ -23,7 +23,7 @@ data class Movie (
     var ratingsSummary: ResultRatingsSummary? = null, //рейтинг
     var episodes: ResultEpisodes? = null,
     var primaryImage: PrimaryImage? = null,   //картинка
-    var titleType: TitleType,
+    var titleType: TitleType?,
     var genres: Genres? = null,                       //жанры
     var titleText: TitleText,                 //название
     var originalTitleText: TitleText,

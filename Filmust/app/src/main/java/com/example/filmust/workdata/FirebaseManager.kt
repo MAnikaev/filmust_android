@@ -1,6 +1,5 @@
 package com.example.filmust.workdata
 
-import androidx.appcompat.app.AppCompatActivity
 import com.example.filmust.fragments.ProfileFragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -8,7 +7,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.GenericTypeIndicator
 import com.google.firebase.database.ValueEventListener
-import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 
 
 class FirebaseManager {
@@ -20,13 +20,9 @@ class FirebaseManager {
         fun readUserData() {
             favoriteReference.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val list =
-                        snapshot.getValue(object : GenericTypeIndicator<MutableList<HashMap<String, Any?>>>() {})
-                    if (list != null) {
-                        for (movie in list){
-                            MoviesRepository.favoriteMovies?.add(fromHashMap(movie))
-                        }
-                    }
+                    val jsonString = snapshot.getValue().toString()
+                    val list = deserializeJsonToMoviesList(jsonString)
+                    MoviesRepository.favoriteMovies = list.toMutableList()
                 }
                 override fun onCancelled(error: DatabaseError) {
                     // Обработка ошибки
@@ -40,13 +36,9 @@ class FirebaseManager {
 
             viewedReference.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val list =
-                        snapshot.getValue(object : GenericTypeIndicator<MutableList<HashMap<String, Any?>>>() {})
-                    if (list != null) {
-                        for (movie in list){
-                            MoviesRepository.viewedMovies?.add(fromHashMap(movie))
-                        }
-                    }
+                    val jsonString = snapshot.getValue().toString()
+                    val list = deserializeJsonToMoviesList(jsonString)
+                    MoviesRepository.viewedMovies = list.toMutableList()
                 }
                 override fun onCancelled(error: DatabaseError) {
                     // Обработка ошибки
@@ -79,40 +71,10 @@ class FirebaseManager {
             }
         }
 
-        private fun fromHashMap(hashMap: HashMap<String, Any?>): Movie {
-            val id = hashMap["id"] as String
-            val resultID = hashMap["resultID"] as String
-            val titleType = hashMap["titleType"] as TitleType
-            val titleText = hashMap["titleText"] as TitleText
-            val originalTitleText = hashMap["originalTitleText"] as TitleText
-            val releaseYear = hashMap["releaseYear"] as ReleaseYear
-            val releaseDate = hashMap["releaseDate"] as ReleaseDate
-            val ratingsSummary = hashMap["ratingsSummary"] as ResultRatingsSummary?
-            val episodes = hashMap["episodes"] as ResultEpisodes?
-            val primaryImage = hashMap["primaryImage"] as PrimaryImage?
-            val genres = hashMap["genres"] as Genres?
-            val runtime = hashMap["runtime"] as Runtime?
-            val series = hashMap["series"] as JsonElement?
-            val meterRanking = hashMap["meterRanking"] as MeterRanking?
-            val plot = hashMap["plot"] as Plot?
-
-            return Movie(
-                id = id,
-                resultID = resultID,
-                titleType = titleType,
-                titleText = titleText,
-                originalTitleText = originalTitleText,
-                releaseYear = releaseYear,
-                releaseDate = releaseDate,
-                ratingsSummary = ratingsSummary,
-                episodes = episodes,
-                primaryImage = primaryImage,
-                genres = genres,
-                runtime = runtime,
-                series = series,
-                meterRanking = meterRanking,
-                plot = plot
-            )
+        private fun deserializeJsonToMoviesList(jsonString : String) : List<Movie> {
+            val json = Json { allowStructuredMapKeys = true }
+            return json.decodeFromString(MovieResponse.serializer(), jsonString).results
         }
+
     }
 }

@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        createRepo()
+        createRepo()
 
         bottomNavigationView = findViewById<BottomNavigationView>(R.id.bnv_main)
 
