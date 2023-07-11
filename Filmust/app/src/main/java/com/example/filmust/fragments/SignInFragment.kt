@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.filmust.MainActivity
 import com.example.filmust.R
 import com.example.filmust.databinding.FragmentSignInBinding
+import com.example.filmust.workdata.FirebaseManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
@@ -21,9 +22,9 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     private var binding: FragmentSignInBinding? = null
     private lateinit var rootNode: FirebaseDatabase
     private lateinit var reference: DatabaseReference
+    private lateinit var firebaseManager: FirebaseManager
     private var password: String = ""
     private var login: String = ""
-    private var name: String? = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -87,6 +88,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                             tiPass.error = "Invalid password"
                         } else{
                             ProfileFragment.login = login
+                            FirebaseManager.readUserData()
                             findNavController().navigate(R.id.action_signInFragment_to_searchFragment)
                         }
                     } else {

@@ -24,10 +24,10 @@ class MovieItem(
     fun onBind(movie: Movie){
         binding.run {
             twTitleName.text = movie.titleText.text
-            if(MoviesRepository.favoriteSet.contains(movie.id)){
+            if(MoviesRepository.favoriteSet.contains(movie.resultID)){
                 btnFavourite.setImageResource(R.drawable.red_heart)
             }
-            if(MoviesRepository.viewedSet.contains(movie.id)){
+            if(MoviesRepository.viewedSet.contains(movie.resultID)){
                 btnViewed.setImageResource(R.drawable.red_eye)
             }
             glide
@@ -41,23 +41,23 @@ class MovieItem(
                 onItemClick(movie.id)
             }
             btnFavourite.setOnClickListener{
-                if(MoviesRepository.favoriteSet.contains(movie.id)){
-                    MoviesRepository.favoriteSet.remove(movie.id)
+                if(MoviesRepository.favoriteSet.contains(movie.resultID)){
+                    MoviesRepository.favoriteSet.remove(movie.resultID)
                     btnFavourite.setImageResource(R.drawable.baseline_favorite_24)
                     MoviesRepository.favoriteMovies?.remove(movie)
                 } else{
-                    MoviesRepository.favoriteSet.add(movie.id)
+                    MoviesRepository.favoriteSet.add(movie.resultID)
                     btnFavourite.setImageResource(R.drawable.red_heart)
                     MoviesRepository.favoriteMovies?.add(movie)
                 }
             }
             btnViewed.setOnClickListener {
-                if(MoviesRepository.viewedSet.contains(movie.id)){
-                    MoviesRepository.viewedSet.remove(movie.id)
+                if(MoviesRepository.viewedSet.contains(movie.resultID)){
+                    MoviesRepository.viewedSet.remove(movie.resultID)
                     btnViewed.setImageResource(R.drawable.baseline_remove_red_eye_24)
                     MoviesRepository.viewedMovies?.remove(movie)
                 } else{
-                    MoviesRepository.viewedSet.add(movie.id)
+                    MoviesRepository.viewedSet.add(movie.resultID)
                     btnViewed.setImageResource(R.drawable.red_eye)
                     MoviesRepository.viewedMovies?.add(movie)
                 }
