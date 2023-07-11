@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.filmust.fragments.ProfileFragment
 import com.example.filmust.workdata.FirebaseManager
+import com.example.filmust.workdata.MoviesRepository
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -65,7 +66,6 @@ class MainActivity : AppCompatActivity() {
     fun sendRepo(){
         if(ProfileFragment.login != ""){
             FirebaseManager.writeUserData()
-
             val login = ProfileFragment.login
             val prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE)
             prefs.edit().putString("userLogin", login).apply()

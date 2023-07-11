@@ -41,8 +41,38 @@ object HttpResponseGetter {
             })
     }
 
-    private fun deserializeJsonToMoviesList(jsonString : String) : List<Movie> {
+    private fun deserializeJsonToMoviesList(jsonString : String) : List<LightMovie> {
         val json = Json { allowStructuredMapKeys = true }
-        return json.decodeFromString(MovieResponse.serializer(), jsonString).results
+        return json.decodeFromString(MovieResponse.serializer(), jsonString).results.toLightMovieList()
+    }
+
+    private fun List<Movie>.toLightMovieList() : List<LightMovie> {
+        var result = mutableListOf<LightMovie>()
+        for(movie in this){
+            var genres : MutableList<String>? = mutableListOf()
+            var date = mutableListOf<String>()
+            date.add(movie.releaseDate?.day.toString())
+            date.add(movie.releaseDate?.month.toString())
+            date.add(movie.releaseDate?.year.toString())
+            if(movie.genres?.genres != null)
+                for (genre in movie.genres?.genres!!) {
+                    genres?.add(genre.text!!)
+                }
+
+            result.add(
+                LightMovie(
+                    id = movie.resultID,
+                    titleText = movie.titleText?.text,
+                    genres = listOf<String>().plus(genres!!.toList()),
+                    imageUrl = movie.primaryImage?.url,
+                    runtime = movie.runtime?.seconds,
+                    releaseDate = date,
+                    rating = movie.meterRanking?.currentRank,
+                    plot = movie.plot?.plotText?.plainText
+                )
+            )
+        }
+
+        return result
     }
 }
