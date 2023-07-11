@@ -81,6 +81,7 @@ class FirebaseManager {
                     MoviesRepository.viewedSet.add(movie.id!!)
                 }
             }
+
         }
 
         fun writeUserData() {

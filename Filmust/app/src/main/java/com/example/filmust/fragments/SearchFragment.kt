@@ -67,6 +67,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             onItemClick = {
                 val bundle = Bundle()
                 bundle.putString("MOVIE_ID", it)
+
                 findNavController().navigate(
                     R.id.action_searchFragment_to_detailFragment,
                     bundle

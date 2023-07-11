@@ -18,14 +18,11 @@ class FavouritesFragment : Fragment(R.layout.fragment_favourites) {
     private var binding: FragmentFavouritesBinding? = null
     private var adapter : MovieAdapter? = null
 
-    private lateinit var likeButton: Button
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFavouritesBinding.bind(view)
 
-        MoviesRepository.favoriteMovies?.let { initAdapter(it) }
+        initAdapter(MoviesRepository.favoriteMovies!!)
 
         binding!!.rvFavourites.findViewHolderForItemId(R.id.btn_favourite.toLong())
     }
@@ -42,14 +39,8 @@ class FavouritesFragment : Fragment(R.layout.fragment_favourites) {
                     bundle
                 )
             })
-    }
 
-    fun likeMovie(){
-
-    }
-
-    fun markWatchedMovie(){
-
+        binding?.rvFavourites?.adapter = adapter
     }
 
     override fun onDestroyView() {
