@@ -5,6 +5,6 @@ object MoviesRepository {
     var searchedMovies : List<LightMovie> = mutableListOf()
     var favoriteMovies : MutableList<LightMovie>? = mutableListOf()
     var viewedMovies : MutableList<LightMovie>? = mutableListOf()
-    val favoriteSet : HashSet<String> = hashSetOf()
-    val viewedSet : HashSet<String> = hashSetOf()
+    val favoriteSet : MutableSet<String> = mutableSetOf()
+    val viewedSet : MutableSet<String> = mutableSetOf()
 }
