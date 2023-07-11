@@ -13,27 +13,47 @@ data class MovieResponse (
 )
 
 @Serializable
-data class Movie (
+data class Movie(
     @SerialName("_id")
-    val id: String,
+    var id: String,
 
     @SerialName("id")
-    val resultID: String,
+    var resultID: String,
 
-    val ratingsSummary: ResultRatingsSummary? = null, //рейтинг
-    val episodes: ResultEpisodes? = null,
-    val primaryImage: PrimaryImage? = null,   //картинка
-    val titleType: TitleType,
-    val genres: Genres? = null,                       //жанры
-    val titleText: TitleText,                 //название
-    val originalTitleText: TitleText,
-    val releaseYear: ReleaseYear,
-    val releaseDate: ReleaseDate,             //дата выхода
-    val runtime: Runtime? = null,             //длительность
-    val series: JsonElement? = null,
-    val meterRanking: MeterRanking? = null,   //рейтинг
-    val plot: Plot? = null                    //описание
-)
+    var ratingsSummary: ResultRatingsSummary? = null, //рейтинг
+    var episodes: ResultEpisodes? = null,
+    var primaryImage: PrimaryImage? = null,   //картинка
+    var titleType: TitleType?,
+    var genres: Genres? = null,                       //жанры
+    var titleText: TitleText,                 //название
+    var originalTitleText: TitleText,
+    var releaseYear: ReleaseYear,
+    var releaseDate: ReleaseDate,             //дата выхода
+    var runtime: Runtime? = null,             //длительность
+    var series: JsonElement? = null,
+    var meterRanking: MeterRanking? = null,   //рейтинг
+    var plot: Plot? = null                    //описание
+){
+    fun toHashMap(): HashMap<String, Any?> {
+        val hashMap = HashMap<String, Any?>()
+        hashMap["id"] = id
+        hashMap["resultID"] = resultID
+        hashMap["titleType"] = titleType
+        hashMap["titleText"] = titleText
+        hashMap["originalTitleText"] = originalTitleText
+        hashMap["releaseYear"] = releaseYear
+        hashMap["releaseDate"] = releaseDate
+        hashMap["ratingsSummary"] = ratingsSummary
+        hashMap["episodes"] = episodes
+        hashMap["primaryImage"] = primaryImage
+        hashMap["genres"] = genres
+        hashMap["runtime"] = runtime
+        hashMap["series"] = series.toString()
+        hashMap["meterRanking"] = meterRanking
+        hashMap["plot"] = plot
+        return hashMap
+    }
+}
 
 @Serializable
 data class ResultEpisodes (

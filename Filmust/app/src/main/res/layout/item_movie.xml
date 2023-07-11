@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toStartOf="@id/btn_viewed"
         app:layout_constraintTop_toTopOf="@id/btn_viewed"
         app:layout_constraintBottom_toBottomOf="@id/btn_viewed"
-        android:src="@drawable/baseline_favorite_24"/>
+        android:src="@drawable/baseline_favorite_24" />
 
     <TextView
         android:id="@+id/tw_title_name"

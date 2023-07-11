@@ -5,8 +5,11 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.navigation.fragment.findNavController
+import com.example.filmust.MainActivity
 import com.example.filmust.R
 import com.example.filmust.databinding.FragmentSignInBinding
+import com.example.filmust.workdata.FirebaseManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -19,15 +22,18 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     private var binding: FragmentSignInBinding? = null
     private lateinit var rootNode: FirebaseDatabase
     private lateinit var reference: DatabaseReference
+    private lateinit var firebaseManager: FirebaseManager
     private var password: String = ""
     private var login: String = ""
-    private var name: String? = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentSignInBinding.bind(view)
         putStrings()
+
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bnv_main)
+        bottomNavigationView?.visibility = View.GONE
 
         rootNode = FirebaseDatabase.getInstance()
         reference = rootNode.getReference("users")
@@ -82,6 +88,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                             tiPass.error = "Invalid password"
                         } else{
                             ProfileFragment.login = login
+                            FirebaseManager.readUserData()
                             findNavController().navigate(R.id.action_signInFragment_to_searchFragment)
                         }
                     } else {
@@ -93,11 +100,11 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 }
             })
 
-            if(tiLogin.error == null && tiPass.error == null){
-
-            } else{
-                Snackbar.make(binding!!.root, "Correct errors!",
-                    Snackbar.LENGTH_SHORT).setAnchorView(binding!!.root).show()
+            if(tiLogin.error != null || tiPass.error!= null) {
+                Snackbar.make(
+                    binding!!.root, "Correct errors!",
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
         }
 

@@ -7,39 +7,67 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.GenericTypeIndicator
 import com.google.firebase.database.ValueEventListener
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 
 
 class FirebaseManager {
-
-    private var rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private var reference: DatabaseReference = rootNode.getReference("users")
-    var favoriteReference = reference.child(ProfileFragment.login).child("favoriteMovie")
-    var viewedReference = reference.child(ProfileFragment.login).child("viewedMovies")
-
-    fun readUserData() {
-        favoriteReference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                MoviesRepository.favoriteMovies = snapshot.getValue(object : GenericTypeIndicator<MutableList<Movie>>() {})
+    companion object {
+        private var rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
+        private var reference: DatabaseReference = rootNode.getReference("users")
+        var favoriteReference = reference.child(ProfileFragment.login).child("favoriteMovie")
+        var viewedReference = reference.child(ProfileFragment.login).child("viewedMovies")
+        fun readUserData() {
+            favoriteReference.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val list = snapshot as List<Movie>
+                    MoviesRepository.favoriteMovies = list.toMutableList()
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    // Обработка ошибки
+                }
+            })
+            if (MoviesRepository.favoriteMovies != null) {
+                for (movie in MoviesRepository.favoriteMovies!!) {
+                    MoviesRepository.favoriteSet.add(movie.resultID)
+                }
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                // Обработка ошибки
+            viewedReference.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val list = snapshot as List<Movie>
+                    MoviesRepository.viewedMovies = list.toMutableList()
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    // Обработка ошибки
+                }
+            })
+            if (MoviesRepository.viewedMovies != null) {
+                for (movie in MoviesRepository.viewedMovies!!) {
+                    MoviesRepository.viewedSet.add(movie.resultID)
+                }
             }
-        })
+        }
 
-        viewedReference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                MoviesRepository.viewedMovies = snapshot.getValue(object : GenericTypeIndicator<MutableList<Movie>>() {})
+        fun writeUserData() {
+            if(MoviesRepository.favoriteMovies?.isNotEmpty() == true)
+            {
+                val favoriteMovies : MutableList<HashMap<String, Any?>> = mutableListOf()
+                for(movie in MoviesRepository.favoriteMovies!!){
+                    favoriteMovies.add(movie.toHashMap())
+                }
+                favoriteReference.setValue(favoriteMovies)
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                // Обработка ошибки
+            if(MoviesRepository.viewedMovies?.isNotEmpty() == true)
+            {
+                val viewedMovies : MutableList<HashMap<String, Any?>> = mutableListOf()
+                for(movie in MoviesRepository.viewedMovies!!){
+                    viewedMovies.add(movie.toHashMap())
+                }
+                viewedReference.setValue(viewedMovies)
             }
-        })
-    }
+        }
 
-    fun writeUserData() {
-        favoriteReference.setValue(MoviesRepository.favoriteMovies)
-        viewedReference.setValue(MoviesRepository.viewedMovies)
     }
 }
