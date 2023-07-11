@@ -20,12 +20,10 @@ import com.example.filmust.workdata.MoviesRepository
 class DetailFragment : Fragment(com.example.filmust.R.layout.fragment_detail) {
 
     private lateinit var binding: FragmentDetailBinding
-
     private var isOnFav : Boolean = false
-
     private var isOnHistory : Boolean = false
 
-    private fun findById(id: String?) : Movie? {
+    private fun findById(id: String?) : LightMovie? {
 
         for (movie in MoviesRepository.searchedMovies) {
             if(movie.id == id)
@@ -74,28 +72,29 @@ class DetailFragment : Fragment(com.example.filmust.R.layout.fragment_detail) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
 
         super.onCreate(savedInstanceState)
 
         binding = FragmentDetailBinding.inflate(inflater, container, false)
 
-        var movieId = arguments?.getString("MOVIE_ID")
+        //val movieId = arguments?.getString("MOVIE_ID")
 
-        val movie = findById(movieId)
+        val movie = arguments?.getString("MOVIE_ID") as LightMovie
+        val movieId = movie.id
 
         isOnHistory = isOnHistMethod(movieId)
         isOnFav = isOnFavMethod(movieId)
 
 
-        Glide.with(this).load(movie?.primaryImage?.url).into(binding.imageView)
+        Glide.with(this).load(movie?.imageUrl).into(binding.imageView)
 
-        binding.tvTitle.text = "${movie?.titleText?.text}"
+        binding.tvTitle.text = "${movie?.titleText}"
 
-        binding.tvDesc.text = "The film ${movie?.titleText?.text} planned to be released in " +
-                "${movie?.releaseDate?.day}." +
-                "${movie?.releaseDate?.month} ${movie?.releaseDate?.year}"
+        binding.tvDesc.text = "The film ${movie?.titleText} planned to be released in " +
+                "${movie?.releaseDate!![0]}." +
+                "${movie?.releaseDate!![1]} ${movie?.releaseDate!![2]}"
 
         if(isOnFav){
             binding.likeBtn.setBackgroundColor(Color.parseColor("#E65656"))
@@ -120,7 +119,7 @@ class DetailFragment : Fragment(com.example.filmust.R.layout.fragment_detail) {
                 }
                 else{
                     likeBtn.setBackgroundColor(Color.parseColor("#E65656"))
-                    MoviesRepository.favoriteMovies!!.add(movie!!)
+                    MoviesRepository.favoriteMovies!!.add(movie)
                     isOnFav = true
                 }
             }
@@ -136,7 +135,7 @@ class DetailFragment : Fragment(com.example.filmust.R.layout.fragment_detail) {
                 }
                 else{
                     historyBtn.setBackgroundColor(Color.parseColor("#F1A468"))
-                    MoviesRepository.viewedMovies!!.add(movie!!)
+                    MoviesRepository.viewedMovies!!.add(movie)
                     isOnHistory = true
                 }
             }

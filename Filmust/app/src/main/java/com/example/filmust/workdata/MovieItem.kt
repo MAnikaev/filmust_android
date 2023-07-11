@@ -24,7 +24,7 @@ class MovieItem(
     fun onBind(movie: LightMovie){
         binding.run {
 
-            twTitleName.text = movie.titleText.text
+            twTitleName.text = movie.titleText
             if(isOnFavMethod(movie.id)){
                 btnFavourite.setImageResource(R.drawable.red_heart)
             } else {
