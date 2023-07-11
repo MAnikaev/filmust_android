@@ -25,7 +25,7 @@ class DetailFragment : Fragment(com.example.filmust.R.layout.fragment_detail) {
 
     private var isOnHistory : Boolean = false
 
-    private fun findById(id: String?) : Movie? {
+    private fun findById(id: String?) : LightMovie? {
 
         for (movie in MoviesRepository.searchedMovies) {
             if(movie.id == id)
@@ -81,7 +81,7 @@ class DetailFragment : Fragment(com.example.filmust.R.layout.fragment_detail) {
 
         binding = FragmentDetailBinding.inflate(inflater, container, false)
 
-        var movieId = arguments?.getString("MOVIE_ID")
+        val movieId = arguments?.getString("MOVIE_ID")
 
         val movie = findById(movieId)
 
@@ -89,7 +89,7 @@ class DetailFragment : Fragment(com.example.filmust.R.layout.fragment_detail) {
         isOnFav = isOnFavMethod(movieId)
 
 
-        Glide.with(this).load(movie?.primaryImage?.url).into(binding.imageView)
+        Glide.with(this).load(movie?.imageUrl).into(binding.imageView)
 
         binding.tvTitle.text = "${movie?.titleText?.text}"
 
