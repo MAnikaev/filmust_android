@@ -23,7 +23,7 @@ class MovieAdapter(
             glide = glide,
             onItemClick = onItemClick
         )
-
+//
     override fun getItemCount(): Int {
         return listOfMovies.size
     }
