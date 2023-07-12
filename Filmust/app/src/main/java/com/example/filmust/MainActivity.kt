@@ -57,18 +57,17 @@ class MainActivity : AppCompatActivity() {
     fun createRepo(){
         val prefs = getSharedPreferences("MyPrefs", AppCompatActivity.MODE_PRIVATE)
         val login = prefs.getString("userLogin", "")
-        if(login != ""){
-            ProfileFragment.login = login!!
-            FirebaseManager.readUserData()
+        if(login == ""){
+            ProfileFragment.login = login
         }
     }
 
     fun sendRepo(){
         if(ProfileFragment.login != ""){
             FirebaseManager.writeUserData()
-            val login = ProfileFragment.login
-            val prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE)
-            prefs.edit().putString("userLogin", login).apply()
         }
+        val login = ProfileFragment.login
+        val prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE)
+        prefs.edit().putString("userLogin", login).apply()
     }
 }

@@ -6,7 +6,7 @@
     <string name="password">Password</string>
     <string name="name">Name</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="having_account">Already have an account? <b>Sign Up</b></string>
+    <string name="having_account">Already have an account? <b>Sign In</b></string>
     <string name="search">Search</string>
     <string name="reccomendations">Recommendations</string>
     <string name="title_name">Title Name</string>
