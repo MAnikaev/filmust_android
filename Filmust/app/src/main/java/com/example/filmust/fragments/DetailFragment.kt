@@ -1,20 +1,24 @@
 package com.example.filmust.fragments
 
+import android.R
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.example.filmust.R
 import com.example.filmust.databinding.FragmentDetailBinding
 import com.example.filmust.workdata.LightMovie
+import com.example.filmust.workdata.HttpResponseGetter
+import com.example.filmust.workdata.Movie
 import com.example.filmust.workdata.MoviesRepository
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
-class DetailFragment : Fragment(R.layout.fragment_detail) {
+class DetailFragment : Fragment(com.example.filmust.R.layout.fragment_detail) {
 
     private lateinit var binding: FragmentDetailBinding
     private var isOnFav : Boolean = false
@@ -70,23 +74,23 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bnv_main)
-        bottomNavigationView?.visibility = View.GONE
-
         super.onCreate(savedInstanceState)
 
         binding = FragmentDetailBinding.inflate(inflater, container, false)
+
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(com.example.filmust.R.id.bnv_main)
+        bottomNavigationView?.visibility = View.GONE
 
         val movieId = arguments?.getString("MOVIE_ID")
 
         val movie = findById(movieId)
 
+
         isOnHistory = isOnHistMethod(movieId)
         isOnFav = isOnFavMethod(movieId)
 
 
-        Glide.with(this).load(movie?.imageUrl).error(R.drawable.filmust_not_found).into(binding.imageView)
+        Glide.with(this).load(movie?.imageUrl).into(binding.imageView)
 
         binding.tvTitle.text = "${movie?.titleText}"
 
@@ -123,7 +127,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             }
         }
 
-
         binding.run {
             historyBtn.setOnClickListener() {
                 if (isOnHistory) {
@@ -144,8 +147,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     override fun onDestroyView() {
         super.onDestroyView()
-
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bnv_main)
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(com.example.filmust.R.id.bnv_main)
         bottomNavigationView?.visibility = View.VISIBLE
     }
 }
